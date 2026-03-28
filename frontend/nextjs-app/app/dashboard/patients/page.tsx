@@ -255,7 +255,7 @@ export default function PatientsPage() {
   const [editTarget,  setEditTarget]  = useState<Patient | null>(null)
   const [deleting,    setDeleting]    = useState<string | null>(null)
 
-  const searchTimeout = useRef<NodeJS.Timeout>()
+  const searchTimeout = useRef<NodeJS.Timeout | null>(null)
   const LIMIT = 20
 
   // ── Fetch patients ──────────────────────────────────────────────────────────

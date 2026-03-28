@@ -443,7 +443,7 @@ export default function AppointmentsPage() {
   const [showCreate, setShowCreate] = useState(false)
   const [deleting,   setDeleting]   = useState<string | null>(null)
 
-  const searchRef = useRef<NodeJS.Timeout>()
+  const searchRef = useRef<NodeJS.Timeout | null>(null)
   const LIMIT = 25
 
   // ── Fetch ──────────────────────────────────────────────────────────────────

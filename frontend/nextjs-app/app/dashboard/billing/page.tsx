@@ -424,7 +424,7 @@ export default function BillingPage() {
   const [payBill,      setPayBill]      = useState<Bill | null>(null)
   const [deleting,     setDeleting]     = useState<string | null>(null)
 
-  const searchRef = useRef<NodeJS.Timeout>()
+  const searchRef = useRef<NodeJS.Timeout | null>(null)
   const LIMIT = 25
 
   // ── Fetch bills ────────────────────────────────────────────────────────────

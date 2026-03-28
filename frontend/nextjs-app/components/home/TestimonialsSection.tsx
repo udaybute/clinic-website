@@ -113,7 +113,7 @@ const TestimonialCard = memo(function TestimonialCard({
 // ── Main component ────────────────────────────────────────────────────────────
 export default function TestimonialsSection() {
   const rootRef  = useRef<HTMLElement>(null)
-  const timerRef = useRef<ReturnType<typeof setInterval>>()
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const [visible, setVisible] = useState(false)
   const [filter,  setFilter]  = useState("All")

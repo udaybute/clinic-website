@@ -82,7 +82,7 @@ function WalkInModal({ clinicId, onClose, onSave }: { clinicId: string; onClose:
   const [form, setForm] = useState({ doctorId: "", time: new Date().toTimeString().slice(0, 5), amount: "500", notes: "" })
   const [saving, setSaving] = useState(false)
   const [error,  setError]  = useState("")
-  const searchRef = useRef<NodeJS.Timeout>()
+  const searchRef = useRef<NodeJS.Timeout | null>(null)
 
   // Load doctors
   useEffect(() => {
@@ -321,7 +321,7 @@ export default function CheckinPage() {
   const [showCheckin, setShowCheckin] = useState(false)
   const [filter,     setFilter]     = useState("all")
   const [successMsg, setSuccessMsg] = useState("")
-  const pollRef = useRef<NodeJS.Timeout>()
+  const pollRef = useRef<NodeJS.Timeout | null>(null)
 
   const fetchQueue = useCallback(async (silent = false) => {
     if (!silent) setLoading(true)
