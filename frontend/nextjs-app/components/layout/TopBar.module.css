@@ -1,0 +1,138 @@
+/* components/layout/TopBar.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap');
+
+.topbar {
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(90deg, #0a1628 0%, #0c2235 40%, #0d4a3a 100%);
+  padding: 10px 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 101;
+  transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
+  overflow: hidden;
+  max-height: 60px;
+  opacity: 1;
+}
+
+.topbar.hidden {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: center;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0d9488;
+  flex-shrink: 0;
+  animation: tbPulse 2s ease-in-out infinite;
+}
+
+@keyframes tbPulse {
+  0%, 100% { opacity: 1;   transform: scale(1);   }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Skeleton shimmer while loading from API */
+.skeleton {
+  height: 14px;
+  width: 280px;
+  border-radius: 7px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.06) 75%
+  );
+  background-size: 200% 100%;
+  animation: tbShimmer 1.4s infinite;
+}
+
+@keyframes tbShimmer {
+  to { background-position: -200% 0; }
+}
+
+.text {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+.sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.cta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0a1628;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  padding: 4px 14px;
+  border-radius: 50px;
+  background: #14b8a6;
+  transition: background 0.18s, color 0.18s, transform 0.18s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cta:hover {
+  background: #0d9488;
+  color: #fff;
+  transform: scale(1.04);
+}
+
+.closeBtn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.32);
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: color 0.18s, background 0.18s;
+  line-height: 0;
+}
+
+.closeBtn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 480px) {
+  .sep  { display: none; }
+  .text { font-size: 0.71rem; }
+  .cta  { display: none; }
+}

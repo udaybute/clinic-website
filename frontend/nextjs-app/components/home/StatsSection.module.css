@@ -1,0 +1,171 @@
+/* ============================================================
+   StatsSection.module.css
+   Design: Deep Slate Navy #0F1C2E · Warm Gold #C9A84C
+   No @import — fonts loaded once in globals.css
+   ============================================================ */
+
+.root {
+  font-family: "DM Sans", sans-serif;
+  background: linear-gradient(135deg, #0F1C2E 0%, #0f2240 60%, #0c1e32 100%);
+  padding: clamp(72px, 8vw, 96px) 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.glow {
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.07), transparent 65%);
+  pointer-events: none;
+}
+
+.inner {
+  max-width: var(--container, 1200px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Header row ---------- */
+.headerRow {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 5px 16px 5px 12px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #C9A84C;
+  flex-shrink: 0;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
+}
+
+.heading {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+.headingEm {
+  font-style: italic;
+  color: #C9A84C;
+}
+
+/* ---------- Stats grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 560px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Stat item ---------- */
+.statItem {
+  text-align: center;
+  padding: clamp(24px, 3vw, 36px) clamp(12px, 2vw, 20px);
+  background: rgba(15, 28, 46, 0.7);
+  position: relative;
+  transition: background 0.3s ease;
+  animation: statFade 0.6s ease both;
+}
+@keyframes statFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.statItem:hover {
+  background: rgba(201,168,76,0.07);
+}
+/* Gold bottom accent on hover */
+.statItem::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  right: 30%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.6), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.statItem:hover::after { opacity: 1; }
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.18);
+  color: #C9A84C;
+  margin: 0 auto 14px;
+  flex-shrink: 0;
+}
+
+.statNum {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  display: block;
+  margin-bottom: 6px;
+}
+.statSuffix {
+  color: #C9A84C;
+}
+
+.statLabel {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(201,168,76,0.75);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.statDesc {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.32);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .statIcon { width: 34px; height: 34px; }
+}

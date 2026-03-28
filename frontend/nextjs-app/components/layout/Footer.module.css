@@ -1,0 +1,416 @@
+/* ============================================================
+   Footer.module.css
+   No @import — fonts loaded once in globals.css.
+   Dark-themed footer layout.
+   ============================================================ */
+
+/* ---------- Root ---------- */
+.root {
+  font-family: "DM Sans", sans-serif;
+  background: linear-gradient(175deg, #0a1628 0%, #0c1e38 60%, #0a1a30 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative radial glows */
+.root::before {
+  content: "";
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.07), transparent 65%);
+}
+.root::after {
+  content: "";
+  position: absolute;
+  bottom: -150px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.04), transparent 65%);
+}
+
+/* ---------- Wave divider ---------- */
+/* background matches the last section (FAQ/Location) above footer */
+.wave {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: #f8f6f3;
+}
+.wave svg {
+  display: block;
+  width: 100%;
+  height: 48px;
+}
+
+/* ---------- Inner container ---------- */
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 1.75rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Main grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ---------- Brand column ---------- */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.brandLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  transition: opacity 0.18s ease;
+  width: fit-content;
+}
+.brandLogo:hover {
+  opacity: 0.85;
+}
+.brandLogo:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 3px;
+}
+
+.brandIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0d9488, #0a1628);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 14px rgba(13, 148, 136, 0.3);
+}
+
+.brandName {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+  display: block;
+  line-height: 1;
+}
+.brandSub {
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0d9488;
+  margin-top: 3px;
+  display: block;
+}
+
+.brandDesc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.72;
+  font-weight: 300;
+  margin-bottom: 22px;
+  max-width: 280px;
+}
+
+/* ---------- Newsletter ---------- */
+.nlWrap {
+  margin-bottom: 22px;
+}
+
+.nlLabel {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+  margin-bottom: 10px;
+}
+
+.nlForm {
+  display: flex;
+  gap: 8px;
+}
+
+.nlInput {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 10px 16px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.nlInput::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+.nlInput:focus {
+  border-color: rgba(13, 148, 136, 0.55);
+}
+.nlInputError {
+  border-color: rgba(239, 68, 68, 0.5) !important;
+}
+.nlInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nlBtn {
+  background: linear-gradient(135deg, #0d9488, #065f4a);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.nlBtn:hover:not(:disabled) {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.nlBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.nlBtn:focus-visible {
+  outline: 2px solid #14b8a6;
+  outline-offset: 2px;
+}
+
+/* Loading spinner inside button */
+.nlSpinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.nlError {
+  font-size: 0.72rem;
+  color: rgba(239, 68, 68, 0.8);
+  margin-top: 6px;
+  font-weight: 400;
+}
+
+/* Success state */
+.nlSuccess {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #0d9488;
+  font-weight: 400;
+  padding: 10px 14px;
+  background: rgba(13, 148, 136, 0.1);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  border-radius: 50px;
+  margin-bottom: 22px;
+}
+
+/* ---------- Social buttons ---------- */
+.socials {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.socialBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.42);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.socialBtn:hover {
+  background: rgba(13, 148, 136, 0.2);
+  color: #14b8a6;
+  border-color: rgba(13, 148, 136, 0.35);
+  transform: translateY(-2px);
+}
+.socialBtn:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+
+/* ---------- Link columns ---------- */
+.linkCol {}
+
+.colTitle {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 18px;
+}
+
+.colLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.colLink {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  text-decoration: none;
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 300;
+  padding: 5px 0;
+  transition: color 0.18s ease, gap 0.18s ease;
+  border-radius: 4px;
+}
+.colLink:hover {
+  color: rgba(255, 255, 255, 0.82);
+  gap: 5px;
+}
+.colLink:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+
+.colLinkArrow {
+  color: #0d9488;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  display: flex;
+  align-items: center;
+}
+.colLink:hover .colLinkArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---------- Bottom bar ---------- */
+.bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.bottomInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 1.75rem 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.copy {
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.22);
+  font-weight: 300;
+}
+
+/* ---------- Trust badges — SVG icons, no emoji ---------- */
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.22);
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .inner {
+    padding: 52px 1.25rem 0;
+  }
+  .brandDesc {
+    max-width: 100%;
+  }
+  .bottomInner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 16px 1.25rem 24px;
+  }
+  .badges {
+    justify-content: center;
+  }
+  .nlForm {
+    flex-direction: column;
+  }
+  .nlBtn {
+    width: 100%;
+  }
+}

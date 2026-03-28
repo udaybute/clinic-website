@@ -1,0 +1,571 @@
+/* ============================================================
+   FeaturesSection.module.css
+   Design system: Deep Slate Navy #0F1C2E · Warm Gold #C9A84C
+   No @import — fonts loaded once in globals.css
+   No color-mix() — hexToRgb / manual rgba values used
+   ============================================================ */
+
+/* ---------- Root ---------- */
+.root {
+  position: relative;
+  background: #FFFDF9;
+  padding: var(--section-py, clamp(80px, 9vw, 120px)) 2rem;
+  overflow: hidden;
+}
+
+/* Subtle dot-grid texture */
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(15,28,46,0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+}
+
+/* ---------- Container ---------- */
+.inner {
+  max-width: var(--container, 1200px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Reveal animation (single observer, CSS stagger) ---------- */
+.fadeUp {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity  0.6s ease var(--delay, 0ms),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--delay, 0ms);
+}
+.fadeUpVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Header ---------- */
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.22);
+  padding: 5px 16px 5px 12px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #C9A84C;
+  flex-shrink: 0;
+  animation: dotPulse 2.4s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
+}
+
+.heading {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+  font-weight: 700;
+  color: #0F1C2E;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.headingEm {
+  font-style: italic;
+  color: #C9A84C;
+}
+
+.sub {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* ---------- Hero row ---------- */
+.heroRow {
+  margin-bottom: 20px;
+}
+
+/* ── Hero card ── */
+.heroCard {
+  position: relative;
+  background: #0F1C2E;
+  border-radius: 20px;
+  padding: 52px 56px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+  border: 1px solid rgba(201,168,76,0.12);
+  min-height: 240px;
+}
+@media (max-width: 720px) {
+  .heroCard {
+    grid-template-columns: 1fr;
+    padding: 36px 28px;
+    gap: 32px;
+  }
+}
+
+/* Top-right gold corner accent */
+.heroCorner {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(225deg, rgba(201,168,76,0.18) 0%, transparent 60%);
+  border-radius: 0 20px 0 0;
+  pointer-events: none;
+}
+
+.heroTag {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 50px;
+  padding: 3px 10px;
+  width: fit-content;
+  margin-bottom: 20px;
+}
+
+.heroLeft {
+  position: relative;
+  z-index: 1;
+}
+
+.heroIconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(201,168,76,0.14);
+  border: 1px solid rgba(201,168,76,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C9A84C;
+  margin-bottom: 20px;
+}
+
+.heroTitle {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.heroDesc {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+.heroHighlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #C9A84C;
+}
+.heroDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #C9A84C;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+/* Stat panel */
+.heroRight {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 180px;
+  height: 180px;
+}
+@media (max-width: 720px) {
+  .heroRight { display: none; }
+}
+
+.heroStat {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.heroStatN {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: #C9A84C;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.heroStatLabel {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+  text-align: center;
+  max-width: 100px;
+  line-height: 1.4;
+}
+
+/* Decorative concentric rings */
+.heroRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.12);
+}
+.heroRing2 {
+  position: absolute;
+  inset: -22px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.06);
+}
+
+/* ---------- Supporting grid ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 960px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; gap: 14px; }
+}
+
+/* ---------- Base card ---------- */
+.card {
+  border-radius: 16px;
+  padding: 28px 26px 24px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.32s ease;
+  cursor: default;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Default white card */
+.cardDefault {
+  background: #FFFFFF;
+  border: 1px solid rgba(15,28,46,0.07);
+  box-shadow: 0 2px 12px rgba(15,28,46,0.04);
+}
+.cardDefault:hover {
+  box-shadow: 0 14px 40px rgba(15,28,46,0.09);
+  border-color: rgba(15,28,46,0.1);
+}
+
+/* Gold-accented card (first supporting card) */
+.cardGold {
+  background: #0F1C2E;
+  border: 1px solid rgba(201,168,76,0.15);
+  box-shadow: 0 4px 20px rgba(15,28,46,0.15);
+}
+.cardGold:hover {
+  box-shadow: 0 16px 48px rgba(15,28,46,0.25);
+  border-color: rgba(201,168,76,0.28);
+}
+
+/* Top accent line */
+.cardDefault::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent);
+  border-radius: 0 0 2px 2px;
+}
+.cardGold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #C9A84C, rgba(201,168,76,0.3));
+}
+
+/* ---------- Card inner layout ---------- */
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.cardTag {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  padding-top: 3px;
+}
+.cardGold .cardTag {
+  color: rgba(201,168,76,0.5);
+}
+
+/* Icon wrapper */
+.cardIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0F1C2E;
+  background: rgba(15,28,46,0.06);
+  border: 1px solid rgba(15,28,46,0.07);
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.card:hover .cardIconWrap {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.2);
+  color: #C9A84C;
+  transform: scale(1.06);
+}
+.cardIconGold {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.2);
+  color: #C9A84C;
+}
+.cardGold .cardIconWrap {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  color: #C9A84C;
+}
+.cardGold:hover .cardIconWrap {
+  background: rgba(201,168,76,0.18);
+  transform: scale(1.06);
+}
+
+/* Title */
+.cardTitle {
+  font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0F1C2E;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+.cardTitleGold {
+  color: #FFFFFF;
+}
+
+/* Description */
+.cardDesc {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.84rem;
+  color: #64748b;
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.cardGold .cardDesc {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Footer row */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(15,28,46,0.06);
+}
+.cardFooterGold {
+  border-top-color: rgba(201,168,76,0.1);
+}
+
+.cardHighlight {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #0F1C2E;
+  opacity: 0.5;
+}
+.cardGold .cardHighlight {
+  color: rgba(201,168,76,0.6);
+  opacity: 1;
+}
+
+.cardArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(15,28,46,0.1);
+  color: rgba(15,28,46,0.25);
+  flex-shrink: 0;
+  transition:
+    background   0.2s ease,
+    border-color 0.2s ease,
+    color        0.2s ease,
+    transform    0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.card:hover .cardArrow {
+  background:    #C9A84C;
+  border-color:  #C9A84C;
+  color:         #0F1C2E;
+  transform:     translateX(2px) rotate(-45deg);
+}
+.cardGold .cardArrow {
+  border-color: rgba(201,168,76,0.25);
+  color: rgba(201,168,76,0.4);
+}
+.cardGold:hover .cardArrow {
+  background:   #C9A84C;
+  border-color: #C9A84C;
+  color:        #0F1C2E;
+}
+
+/* ---------- CTA strip ---------- */
+.ctaStrip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 56px;
+  padding: 36px 40px;
+  background: #0F1C2E;
+  border-radius: 16px;
+  flex-wrap: wrap;
+  border: 1px solid rgba(201,168,76,0.1);
+}
+
+.ctaText {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.8);
+  flex: 1;
+  min-width: 200px;
+  font-style: italic;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  background: #C9A84C;
+  color: #0F1C2E;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 13px 24px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.ctaPrimary:hover {
+  background: #D4B55E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201,168,76,0.3);
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.45);
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 400;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding-bottom: 1px;
+  white-space: nowrap;
+  transition: color 0.18s, border-color 0.18s;
+}
+.ctaSecondary:hover {
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .ctaStrip {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 28px 24px;
+    text-align: center;
+    gap: 14px;
+  }
+  .ctaText { text-align: center; }
+  .ctaPrimary, .ctaSecondary {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroCard { padding: 28px 22px; border-radius: 14px; }
+  .card     { padding: 22px 18px 20px; border-radius: 12px; }
+  .heroTag  { margin-bottom: 14px; }
+  .heading  { margin-bottom: 0; }
+  .header   { margin-bottom: 44px; }
+}

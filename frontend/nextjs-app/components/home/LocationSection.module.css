@@ -1,0 +1,530 @@
+/* ============================================================
+   LocationSection.module.css
+   Layout + structure only. Colors via globals.css tokens.
+   No @import — fonts loaded once in globals.css.
+   ============================================================ */
+
+/* ---------- Root ---------- */
+.root {
+  position: relative;
+  padding: var(--section-py, clamp(72px, 8vw, 112px)) 2rem;
+  background: #f8f6f3;
+  overflow: hidden;
+}
+
+/* Subtle decorative bg accent — top-right corner glow */
+.bgAccent {
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(13, 148, 136, 0.06) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Container ---------- */
+.container {
+  max-width: var(--container, 1200px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+/* ---------- Reveal animation ---------- */
+.fadeUp {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.rootVisible .fadeUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Header block ---------- */
+.headerBlock {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #0d9488;
+  background: rgba(13, 148, 136, 0.07);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  padding: 5px 16px 5px 12px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #0d9488;
+  flex-shrink: 0;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
+}
+
+.heading {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  color: #0a1628;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.headingEm {
+  font-style: italic;
+  color: #0d9488;
+}
+
+.sub {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* ---------- Live status pill ---------- */
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: 50px;
+  padding: 6px 14px 6px 10px;
+  margin-bottom: 24px;
+  border: 1px solid transparent;
+}
+.statusOpen {
+  color: #0d9488;
+  background: rgba(13, 148, 136, 0.08);
+  border-color: rgba(13, 148, 136, 0.2);
+}
+.statusClosed {
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.07);
+  border-color: rgba(220, 38, 38, 0.15);
+}
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.statusOpen .statusDot {
+  background: #0d9488;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.25);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+.statusClosed .statusDot {
+  background: #dc2626;
+}
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.25); }
+  50%       { box-shadow: 0 0 0 5px rgba(13, 148, 136, 0.08); }
+}
+.statusLabel {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ---------- Contact cards ---------- */
+.contactCards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid rgba(10, 22, 40, 0.07);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  cursor: default;
+}
+a.contactCard {
+  cursor: pointer;
+}
+a.contactCard:hover {
+  border-color: rgba(13, 148, 136, 0.3);
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Phone card — most prominent */
+.contactCardPhone {
+  background: #0a1628;
+  border-color: #0a1628;
+}
+.contactCardPhone .contactIcon {
+  background: rgba(13, 148, 136, 0.2);
+  color: #0d9488;
+}
+.contactCardPhone .contactLabel {
+  color: rgba(255, 255, 255, 0.45);
+}
+.contactCardPhone .contactValue {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.contactCardPhone .contactArrow {
+  color: #0d9488;
+}
+.contactCardPhone:hover {
+  border-color: #0a1628;
+  box-shadow: 0 8px 28px rgba(10, 22, 40, 0.22);
+  transform: translateY(-2px);
+}
+
+.contactIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(13, 148, 136, 0.07);
+  color: #0d9488;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contactText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.contactLabel {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+.contactValue {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #0a1628;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contactArrow {
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: transform 0.2s, color 0.2s;
+}
+a.contactCard:hover .contactArrow {
+  transform: translateX(3px);
+  color: #0d9488;
+}
+
+/* ---------- Hours card ---------- */
+.hoursCard {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(10, 22, 40, 0.07);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.hoursHeader {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 18px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  background: rgba(10, 22, 40, 0.02);
+  border-bottom: 1px solid rgba(10, 22, 40, 0.05);
+}
+
+.hoursList {
+  display: flex;
+  flex-direction: column;
+}
+
+.hoursRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 18px;
+  border-bottom: 1px solid rgba(10, 22, 40, 0.04);
+  transition: background 0.2s;
+}
+.hoursRow:last-child {
+  border-bottom: none;
+}
+
+/* Today's row highlighted */
+.hoursRowToday {
+  background: rgba(13, 148, 136, 0.04);
+  border-left: 2.5px solid #0d9488;
+}
+
+.hoursDay {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.83rem;
+  color: #0a1628;
+  font-weight: 400;
+}
+
+.todayBadge {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0d9488;
+  background: rgba(13, 148, 136, 0.1);
+  border-radius: 50px;
+  padding: 2px 7px;
+}
+
+.hoursTime {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 50px;
+}
+.hoursTimeOpen {
+  color: #0d9488;
+  background: rgba(13, 148, 136, 0.08);
+}
+.hoursTimeClosed {
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.07);
+}
+
+/* ---------- Landmarks ---------- */
+.landmarks {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 28px;
+}
+.landmark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.83rem;
+  color: #64748b;
+  font-weight: 300;
+}
+.landmarkIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(13, 148, 136, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0d9488;
+  flex-shrink: 0;
+}
+
+/* ---------- CTA row ---------- */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #0d9488, #0a1628);
+  color: #fff;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 13px 24px;
+  border-radius: 50px;
+  box-shadow: 0 5px 20px rgba(13, 148, 136, 0.28);
+  transition: transform 0.2s, box-shadow 0.2s, gap 0.2s;
+}
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(13, 148, 136, 0.38);
+  gap: 10px;
+}
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: #0a1628;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 500;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(10, 22, 40, 0.15);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.ctaSecondary:hover {
+  border-color: rgba(13, 148, 136, 0.4);
+  color: #0d9488;
+  transform: translateY(-1px);
+}
+
+/* ---------- Map column ---------- */
+.mapWrap {
+  position: sticky;
+  top: calc(var(--navbar-h, 68px) + 24px);
+}
+
+.mapFrame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 460px;
+  box-shadow: 0 12px 48px rgba(10, 22, 40, 0.13);
+  border: 1px solid rgba(10, 22, 40, 0.06);
+  margin-bottom: 14px;
+}
+@media (max-width: 960px) {
+  .mapFrame {
+    height: 360px;
+  }
+  .mapWrap {
+    position: static;
+  }
+}
+@media (max-width: 480px) {
+  .mapFrame {
+    height: 280px;
+  }
+}
+
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Floating badge overlaid on map */
+.mapBadge {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  border-radius: 50px;
+  padding: 8px 14px 8px 10px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #0a1628;
+  box-shadow: 0 4px 16px rgba(10, 22, 40, 0.15);
+  border: 1px solid rgba(10, 22, 40, 0.06);
+}
+.mapBadgePin {
+  color: #0d9488;
+  display: flex;
+  align-items: center;
+}
+
+/* Quick stats strip */
+.mapStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.mapStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: #fff;
+  border: 1px solid rgba(10, 22, 40, 0.07);
+  border-radius: 12px;
+  padding: 14px 8px;
+}
+
+.mapStatN {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0a1628;
+  line-height: 1;
+}
+
+.mapStatLabel {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.65rem;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ---------- Mobile overrides ---------- */
+@media (max-width: 480px) {
+  .ctaRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .ctaPrimary,
+  .ctaSecondary {
+    justify-content: center;
+  }
+  .contactValue {
+    white-space: normal;
+  }
+}

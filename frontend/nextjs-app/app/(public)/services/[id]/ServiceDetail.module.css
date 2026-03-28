@@ -1,0 +1,477 @@
+/* app/(public)/services/[id]/ServiceDetail.module.css
+   FIXES:
+   - All #0ea5e9 blue → #0d9488 teal (brand consistency)
+   - All #0f172a flat black → #0a1628 navy (brand consistency)
+   - DM Serif Display → Cormorant Garamond (unified design system)
+   - background #f1f5f9 → #f9f7f4 (unified page background)
+   - btnBook is now teal gradient instead of flat blue
+   - includeDot is now teal
+   - stepNum uses teal gradient
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+.pageRoot {
+  font-family: 'DM Sans', sans-serif;
+  background: #f9f7f4;
+  min-height: 100vh;
+  color: #0a1628;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOP BAR ─────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(10, 22, 40, 0.07);
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: #475569;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  font-family: inherit;
+}
+.backBtn:hover {
+  background: rgba(13, 148, 136, 0.07);
+  color: #0d9488;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+.breadcrumb a {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.breadcrumb a:hover { color: #0d9488; }
+.breadcrumb span {
+  color: #0a1628;
+  font-weight: 500;
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+}
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 22, 40, 0.82) 0%,
+    rgba(10, 22, 40, 0.12) 60%,
+    transparent 100%
+  );
+}
+.heroBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 32px;
+}
+.catPill {
+  display: inline-block;
+  background: rgba(13, 148, 136, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(13, 148, 136, 0.45);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 13px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+}
+.heroTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+/* ── BODY GRID ───────────────────────────────────────────── */
+.bodyGrid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 24px;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .bodyGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .sidebar {
+    order: -1;
+    margin-bottom: 20px;
+  }
+  .mainCol {
+    padding-right: 0 !important;
+  }
+}
+
+/* ── MAIN COLUMN ─────────────────────────────────────────── */
+.mainCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(10, 22, 40, 0.06);
+  box-shadow: 0 2px 10px rgba(10, 22, 40, 0.04);
+}
+
+.sectionLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 14px;
+}
+
+.bodyText {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* ── STATS ───────────────────────────────────────────────── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 500px) {
+  .statsRow { grid-template-columns: repeat(2, 1fr); }
+}
+.statCard {
+  background: rgba(13, 148, 136, 0.04);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid rgba(13, 148, 136, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background 0.2s;
+}
+.statCard:hover { background: rgba(13, 148, 136, 0.08); }
+.statVal {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0a1628;
+  letter-spacing: -0.02em;
+}
+.statUnit {
+  font-size: 13px;
+  font-weight: 500;
+}
+.statLbl {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 3px;
+}
+
+/* ── INCLUDES ────────────────────────────────────────────── */
+.includesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 500px) {
+  .includesGrid { grid-template-columns: 1fr; }
+}
+.includeItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #475569;
+  background: rgba(13, 148, 136, 0.04);
+  border-radius: 10px;
+  padding: 11px 14px;
+  border: 1px solid rgba(13, 148, 136, 0.1);
+}
+/* FIXED: was #0ea5e9 blue — now teal */
+.includeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0d9488;
+  flex-shrink: 0;
+}
+
+/* ── STEPS ───────────────────────────────────────────────── */
+.steps {
+  display: flex;
+  flex-direction: column;
+}
+.stepItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(10, 22, 40, 0.06);
+}
+.stepItem:last-child { border-bottom: none; }
+/* FIXED: was flat #0f172a — now teal gradient */
+.stepNum {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0d9488, #0a1628);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
+}
+.stepTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0a1628;
+  margin-bottom: 4px;
+}
+.stepDesc {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ── DOCTORS ─────────────────────────────────────────────── */
+.doctorsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.docCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(10, 22, 40, 0.08);
+  background: rgba(10, 22, 40, 0.02);
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.docCard:hover {
+  border-color: rgba(13, 148, 136, 0.35);
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.1);
+  background: rgba(13, 148, 136, 0.04);
+}
+.docAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(13, 148, 136, 0.2);
+}
+.docName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0a1628;
+}
+.docSpec {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 1px;
+}
+.docStar { color: #f59e0b; font-size: 11px; }
+.docArrow { margin-left: auto; color: #94a3b8; flex-shrink: 0; }
+
+/* ── FAQS ────────────────────────────────────────────────── */
+.faqs { display: flex; flex-direction: column; }
+.faqItem {
+  border-bottom: 1px solid rgba(10, 22, 40, 0.06);
+  padding: 14px 0;
+}
+.faqItem:last-child { border-bottom: none; }
+.faqQ {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0a1628;
+  cursor: pointer;
+  list-style: none;
+  gap: 12px;
+}
+.faqQ::-webkit-details-marker { display: none; }
+.faqChev { flex-shrink: 0; transition: transform 0.22s; }
+details[open] .faqChev { transform: rotate(180deg); }
+.faqA {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.7;
+  margin-top: 10px;
+  padding-left: 2px;
+  font-weight: 300;
+}
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-self: flex-start;
+  position: sticky;
+  top: 24px;
+}
+
+.priceBlock {
+  background: linear-gradient(135deg, #0a1628 0%, #0f2240 100%);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.priceFrom {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 4px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.priceVal {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.priceNote {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.infoList {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  border: 1px solid rgba(10, 22, 40, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 10px rgba(10, 22, 40, 0.04);
+}
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.infoLbl { font-size: 13px; color: #94a3b8; }
+.infoVal { font-size: 13px; font-weight: 600; color: #0a1628; }
+.divider { height: 1px; background: rgba(10, 22, 40, 0.06); }
+.availBadge {
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+/* FIXED: was #0ea5e9 flat blue — now teal gradient */
+.btnBook {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, #0d9488, #0a1628);
+  color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 18px rgba(13, 148, 136, 0.3);
+  transition: opacity 0.18s, transform 0.18s;
+}
+.btnBook:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btnGhost {
+  display: block;
+  text-align: center;
+  background: #ffffff;
+  color: #334155;
+  padding: 13px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid rgba(10, 22, 40, 0.12);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.btnGhost:hover {
+  border-color: #0d9488;
+  color: #0d9488;
+  background: rgba(13, 148, 136, 0.04);
+}
+/* ── BENEFITS ────────────────────────────────────────────── */
+/* Added: benefits field was in services.data.ts but never rendered */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 500px) {
+  .benefitsGrid { grid-template-columns: 1fr; }
+}
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0a1628;
+  background: rgba(13, 148, 136, 0.05);
+  border-radius: 10px;
+  padding: 11px 14px;
+  border: 1px solid rgba(13, 148, 136, 0.12);
+}
