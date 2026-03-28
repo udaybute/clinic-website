@@ -10,6 +10,7 @@ export interface Doctor {
   qualifications:  string
   consultationFee: number
   avatar:          string
+  image?:          string
   rating:          number
   reviewCount:     number
   tags:            string[]
