@@ -67,7 +67,7 @@ export class AiService {
   private readonly logger = new Logger(AiService.name)
 
   constructor(private config: ConfigService) {
-    this.openai = new OpenAI({ apiKey: config.getOrThrow<string>('OPENAI_API_KEY') })
+    this.openai = new OpenAI({ apiKey: config.get<string>('OPENAI_API_KEY') ?? 'sk-disabled' })
 
     // GC expired sessions every 10 minutes
     setInterval(() => {
