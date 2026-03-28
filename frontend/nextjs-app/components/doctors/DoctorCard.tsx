@@ -122,11 +122,9 @@ export default function DoctorCard({ doctor }: { doctor: Doctor }) {
     return () => obs.disconnect()
   }, [])
 
-  // Derive optional fields gracefully — Doctor type may not have all fields
-  const patientCount = (doctor as any).patientCount as string | undefined
-  const education    = (doctor as any).education    as string | undefined
-  const available    = (doctor as any).available    as boolean | undefined
-  const isAvailable  = available !== false // default true if not provided
+  const patientCount = doctor.patientCount
+  const education    = doctor.education
+  const isAvailable  = doctor.available !== false // default true if not provided
 
   return (
     <article
