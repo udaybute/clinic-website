@@ -34,6 +34,7 @@ export interface Service {
   description: string
   image?:      string
   anaesthesia?: string
+  popular?:    boolean
 
   benefits?:  string[]
   includes?:  string[]
