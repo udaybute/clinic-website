@@ -397,7 +397,7 @@ export default function AnalyticsPage() {
                     </Pie>
                     <Legend iconType="circle" iconSize={8}
                       formatter={(v) => <span style={{ fontSize: 11, color: "#64748b", textTransform: "capitalize" }}>{v}</span>} />
-                    <Tooltip formatter={(v: number) => [v, ""]}
+                    <Tooltip formatter={(v) => [v, ""]}
                       contentStyle={{ borderRadius: 10, border: "1px solid rgba(10,22,40,.1)", fontSize: 12 }} />
                   </PieChart>
                 </ResponsiveContainer>
