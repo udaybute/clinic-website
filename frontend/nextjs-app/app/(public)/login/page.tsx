@@ -214,8 +214,7 @@ export default function LoginPage() {
           <p className="lg-sub">Select your role or enter credentials to sign in</p>
 
           <div className="lg-status">
-            🔌 Backend: <strong>localhost:4000</strong> — run
-            <code>npm run start:dev</code> in the backend folder
+            🔌 Backend: <strong>{process.env.NEXT_PUBLIC_API_URL ?? "localhost:4000/api"}</strong>
           </div>
 
           {/* Role quick-fill */}
