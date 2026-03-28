@@ -1,0 +1,353 @@
+// prisma/schema.prisma
+// UPDATED: Added experience, qualifications, consultationFee, availability to User model
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum Role {
+  admin
+  doctor
+  receptionist
+}
+
+enum AppStatus {
+  pending
+  confirmed
+  checked_in
+  in_progress
+  completed
+  cancelled
+  no_show
+}
+
+enum BillStatus {
+  pending
+  paid
+  partial
+  cancelled
+}
+
+enum PaymentMethod {
+  cash
+  card
+  upi
+  insurance
+}
+
+enum Gender {
+  male
+  female
+  other
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CLINIC
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Clinic {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  phone        String
+  address      String
+  website      String?
+  openingHours String   @default("Mon-Sat 9AM-7PM")
+  logoUrl      String?
+  plan         String   @default("starter")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  users        User[]
+  patients     Patient[]
+  appointments Appointment[]
+  services     Service[]
+  bills        Bill[]
+
+  @@map("clinics")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// USER
+// ─────────────────────────────────────────────────────────────────────────────
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  role      Role
+  specialty String?
+  phone     String?
+  avatar    String?
+  isActive  Boolean   @default(true)
+  lastLogin DateTime?
+  clinicId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // ── Doctor-specific fields (null for admin/receptionist) ──────────────────
+  experience      Int?      // years of experience
+  qualifications  String?   // e.g. "BDS, MDS (Orthodontics)"
+  consultationFee Float?    // in INR
+  availability    String[]  @default([]) // e.g. ["Mon 09:00-18:00", "Tue 09:00-18:00"]
+
+  clinic        Clinic         @relation(fields: [clinicId], references: [id])
+  appointments  Appointment[]  @relation("DoctorAppointments")
+  prescriptions Prescription[]
+  consultations Consultation[]
+  labRequests   LabRequest[]
+
+  @@map("users")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PATIENT
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Patient {
+  id          String    @id @default(uuid())
+  clinicId    String
+  name        String
+  email       String?
+  phone       String
+  dob         DateTime?
+  gender      Gender?
+  address     String?
+  insurance   String?
+  totalVisits Int       @default(0)
+  lastVisit   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // MEDICAL — DOCTOR ONLY
+  bloodGroup         String?
+  medicalHistory     String?
+  allergies          String[]  @default([])
+  currentMedications String[]  @default([])
+  doctorNotes        String?
+
+  clinic        Clinic         @relation(fields: [clinicId], references: [id])
+  appointments  Appointment[]
+  prescriptions Prescription[]
+  consultations Consultation[]
+  bills         Bill[]
+  labRequests   LabRequest[]
+
+  @@map("patients")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SERVICE
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Service {
+  id          String   @id @default(uuid())
+  clinicId    String
+  name        String
+  description String
+  duration    Int
+  price       Float
+  category    String
+  popular     Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  icon        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  clinic       Clinic        @relation(fields: [clinicId], references: [id])
+  appointments Appointment[]
+
+  @@map("services")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// APPOINTMENT
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Appointment {
+  id            String    @id @default(uuid())
+  clinicId      String
+  patientId     String
+  doctorId      String
+  serviceId     String?
+  date          DateTime
+  time          String
+  duration      Int       @default(30)
+  status        AppStatus @default(pending)
+  amount        Float
+  notes         String?
+  clinicalNotes String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  clinic       Clinic        @relation(fields: [clinicId], references: [id])
+  patient      Patient       @relation(fields: [patientId], references: [id])
+  doctor       User          @relation("DoctorAppointments", fields: [doctorId], references: [id])
+  service      Service?      @relation(fields: [serviceId], references: [id])
+  consultation Consultation?
+  bill         Bill?
+
+  @@map("appointments")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONSULTATION — DOCTOR ONLY
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Consultation {
+  id             String    @id @default(uuid())
+  clinicId       String
+  patientId      String
+  doctorId       String
+  appointmentId  String    @unique
+  chiefComplaint String
+  symptoms       String[]  @default([])
+  examination    String?
+  diagnosis      String?
+  treatment      String?
+  notes          String?
+  bp             String?
+  pulse          String?
+  temperature    String?
+  weight         String?
+  height         String?
+  followUpDate   DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  patient     Patient     @relation(fields: [patientId], references: [id])
+  doctor      User        @relation(fields: [doctorId], references: [id])
+  appointment Appointment @relation(fields: [appointmentId], references: [id])
+
+  @@map("consultations")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PRESCRIPTION — DOCTOR ONLY
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Prescription {
+  id            String    @id @default(uuid())
+  clinicId      String
+  patientId     String
+  doctorId      String
+  appointmentId String?
+  diagnosis     String
+  labTests      String[]  @default([])
+  notes         String?
+  followUpDate  DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  patient   Patient    @relation(fields: [patientId], references: [id])
+  doctor    User       @relation(fields: [doctorId], references: [id])
+  medicines Medicine[]
+
+  @@map("prescriptions")
+}
+
+model Medicine {
+  id             String @id @default(uuid())
+  prescriptionId String
+  name           String
+  dosage         String
+  frequency      String
+  duration       String
+  notes          String?
+
+  prescription Prescription @relation(fields: [prescriptionId], references: [id], onDelete: Cascade)
+
+  @@map("medicines")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LAB REQUEST — DOCTOR ONLY
+// ─────────────────────────────────────────────────────────────────────────────
+
+model LabRequest {
+  id          String   @id @default(uuid())
+  clinicId    String
+  patientId   String
+  doctorId    String
+  testName    String
+  result      String?
+  normalRange String?
+  status      String   @default("pending")
+  doctorNotes String?
+  date        DateTime @default(now())
+
+  patient Patient @relation(fields: [patientId], references: [id])
+  doctor  User    @relation(fields: [doctorId], references: [id])
+
+  @@map("lab_requests")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BILL
+// ─────────────────────────────────────────────────────────────────────────────
+
+model Bill {
+  id            String         @id @default(uuid())
+  clinicId      String
+  patientId     String
+  appointmentId String         @unique
+  subtotal      Float
+  discount      Float          @default(0)
+  tax           Float          @default(0)
+  total         Float
+  paid          Float          @default(0)
+  balance       Float
+  status        BillStatus     @default(pending)
+  paymentMethod PaymentMethod?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  clinic      Clinic      @relation(fields: [clinicId], references: [id])
+  patient     Patient     @relation(fields: [patientId], references: [id])
+  appointment Appointment @relation(fields: [appointmentId], references: [id])
+  items       BillItem[]
+
+  @@map("bills")
+}
+
+model BillItem {
+  id          String @id @default(uuid())
+  billId      String
+  description String
+  quantity    Int    @default(1)
+  rate        Float
+  amount      Float
+
+  bill Bill @relation(fields: [billId], references: [id], onDelete: Cascade)
+
+  @@map("bill_items")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AUDIT LOG
+// ─────────────────────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  clinicId   String
+  userId     String
+  userEmail  String
+  action     String
+  resource   String
+  resourceId String?
+  details    Json?
+  ip         String?
+  createdAt  DateTime @default(now())
+
+  @@index([clinicId, createdAt])
+  @@map("audit_logs")
+}
