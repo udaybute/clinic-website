@@ -87,6 +87,7 @@ export default async function DoctorsPage() {
     const base = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000/api"
     const res  = await fetch(`${base}/staff?role=doctor&limit=20&active=true`, {
       next: { revalidate: 300 }, // ISR — refresh every 5 minutes
+      signal: AbortSignal.timeout(8000), // fail fast if backend is sleeping
     })
     if (res.ok) {
       const data = await res.json()
