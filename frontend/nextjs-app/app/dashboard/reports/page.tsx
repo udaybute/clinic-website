@@ -114,7 +114,7 @@ export default function ReportsPage() {
 
   // For the animated number counters
   const [counted, setCounted] = useState(false)
-  const countTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const countTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const fetchAll = useCallback(async () => {
     setLoading(true); setError(null); setCounted(false)

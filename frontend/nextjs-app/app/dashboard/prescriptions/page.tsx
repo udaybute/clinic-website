@@ -131,7 +131,7 @@ export default function PrescriptionsPage() {
   useEffect(() => { fetchRx() }, [fetchRx])
 
   // ── Fetch patients (debounced) ────────────────────────────────────────────
-  const patientTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const patientTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   useEffect(() => {
     if (patientSearch.length < 2) { setPatients([]); return }
     if (patientTimer.current) clearTimeout(patientTimer.current)

@@ -191,7 +191,7 @@ export default function WaitlistPage() {
   const [callingNext, setCallingNext] = useState(false)
   const [successMsg, setSuccessMsg] = useState("")
   const [tab,        setTab]        = useState<"waiting" | "completed">("waiting")
-  const pollRef = useRef<NodeJS.Timeout | null>(null)
+  const pollRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const fetchAll = useCallback(async (silent = false) => {
     if (!silent) setLoading(true)

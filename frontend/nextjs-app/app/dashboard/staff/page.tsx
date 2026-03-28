@@ -171,7 +171,7 @@ export default function StaffPage() {
   const [toggling,     setToggling]     = useState<string | null>(null)
   const [deleting,     setDeleting]     = useState<string | null>(null)
   const [successMsg,   setSuccessMsg]   = useState("")
-  const searchRef = useRef<NodeJS.Timeout | null>(null)
+  const searchRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const fetchStaff = useCallback(async (pg = 1, q = search, rf = roleFilter) => {
     setLoading(true); setError(null)

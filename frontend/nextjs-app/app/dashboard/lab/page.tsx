@@ -359,7 +359,7 @@ export default function LabPage() {
   const [resultTarget, setResultTarget] = useState<LabRequest | null>(null)
   const [deleting,     setDeleting]     = useState<string | null>(null)
 
-  const searchRef = useRef<NodeJS.Timeout | null>(null)
+  const searchRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const LIMIT = 20
 
   // ── Fetch lab requests ─────────────────────────────────────────────────────
