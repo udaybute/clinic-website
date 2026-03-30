@@ -171,6 +171,7 @@ function AppointmentModal({ mode, initial = {}, onClose, onSave, isDoctor }: Boo
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!form.patientId) return setError("Patient is required")
+    if (!form.doctorId)  return setError("Doctor is required")
     if (!form.date)       return setError("Date is required")
     if (!form.time)       return setError("Time is required")
     if (!form.amount)     return setError("Amount is required")
@@ -179,7 +180,7 @@ function AppointmentModal({ mode, initial = {}, onClose, onSave, isDoctor }: Boo
     try {
       const payload: any = {
         patientId: form.patientId,
-        doctorId:  form.doctorId  || undefined,
+        doctorId:  form.doctorId,
         serviceId: form.serviceId || undefined,
         date:      form.date,
         time:      form.time,
@@ -235,6 +236,21 @@ function AppointmentModal({ mode, initial = {}, onClose, onSave, isDoctor }: Boo
                 </select>
               ) : (
                 <input placeholder="Patient ID" value={form.patientId} onChange={set("patientId")} style={inputStyle} />
+              )
+            )}
+          </div>
+
+          {/* Doctor */}
+          <div>
+            <label style={labelStyle}>Doctor <span style={{ color: "#ef4444" }}>*</span></label>
+            {loadingData ? <Skel h="38px" r="9px" /> : (
+              doctors.length ? (
+                <select value={form.doctorId} onChange={set("doctorId")} style={inputStyle}>
+                  <option value="">— Select Doctor —</option>
+                  {doctors.map(d => <option key={d.id} value={d.id}>{d.name}{d.specialty ? ` · ${d.specialty}` : ""}</option>)}
+                </select>
+              ) : (
+                <input placeholder="Doctor ID" value={form.doctorId} onChange={set("doctorId")} style={inputStyle} />
               )
             )}
           </div>
