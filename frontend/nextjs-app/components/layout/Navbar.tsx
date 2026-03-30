@@ -6,11 +6,10 @@ import { useState, useEffect, CSSProperties } from "react"
 import styles from "./Navbar.module.css"
 
 const NAV_LINKS = [
-  { href: "/",          label: "Home"       },
-  { href: "/services",  label: "Services"   },
-  { href: "/doctors",   label: "Doctors"    },
-  { href: "/booking",   label: "Booking"    },
-  { href: "/dashboard", label: "Dashboard"  },
+  { href: "/",         label: "Home"     },
+  { href: "/services", label: "Services" },
+  { href: "/doctors",  label: "Doctors"  },
+  { href: "/booking",  label: "Booking"  },
 ]
 
 // Pages with a full-screen dark hero at the top

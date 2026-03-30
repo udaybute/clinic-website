@@ -13,15 +13,21 @@ import Breadcrumb   from "@/components/dashboard/Breadcrumb"
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mounted,     setMounted]     = useState(false)
   const { isLoggedIn } = useAuthStore()
   const router = useRouter()
 
-  // Guard: redirect to login if not authenticated
   useEffect(() => {
-    if (!isLoggedIn) router.replace("/login")
-  }, [isLoggedIn, router])
+    setMounted(true)
+    setSidebarOpen(window.innerWidth > 768)
+  }, [])
 
-  if (!isLoggedIn) return null
+  // Guard: only redirect after mount so Zustand has time to hydrate from localStorage
+  useEffect(() => {
+    if (mounted && !isLoggedIn) router.replace("/login")
+  }, [isLoggedIn, mounted, router])
+
+  if (!mounted || !isLoggedIn) return null
 
   return (
     <>
