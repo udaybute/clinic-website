@@ -364,7 +364,9 @@ export default function PatientsPage() {
         .pt-notice.restricted { background:rgba(245,158,11,.08); color:#d97706; border:1px solid rgba(245,158,11,.2); }
 
         .pt-toolbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+        @media(max-width:640px) { .pt-toolbar{flex-direction:column;align-items:stretch;} .pt-toolbar>*{width:100%;} }
         .pt-search  { display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:50px; border:1.5px solid rgba(10,22,40,.1); background:#fff; transition:border-color .18s; flex:1; max-width:320px; }
+        @media(max-width:640px) { .pt-search{max-width:100%;} }
         .pt-search:focus-within { border-color:#0d9488; }
         .pt-search input { border:none; outline:none; font-family:'DM Sans',sans-serif; font-size:.83rem; color:#0a1628; background:transparent; width:100%; }
         .pt-search input::placeholder { color:#94a3b8; }
@@ -379,6 +381,7 @@ export default function PatientsPage() {
 
         /* Patient cards */
         .pt-grid  { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:14px; }
+        @media(max-width:640px) { .pt-grid{grid-template-columns:1fr;} }
         .pt-card  { background:#fff; border-radius:16px; border:1px solid rgba(10,22,40,.07); box-shadow:0 2px 12px rgba(10,22,40,.05); padding:18px; cursor:pointer; transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .2s; animation:fadeIn .3s ease both; }
         .pt-card:hover { transform:translateY(-4px); box-shadow:0 8px 30px rgba(10,22,40,.1); }
         .pt-card.selected { border-color:#0d9488; box-shadow:0 0 0 3px rgba(13,148,136,.1); }
@@ -408,8 +411,10 @@ export default function PatientsPage() {
         .pt-detail-name { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:700; color:#0a1628; }
         .pt-detail-sub  { font-size:.72rem; color:#94a3b8; }
         .pt-detail-body { padding:16px 20px; max-height:calc(100vh - 280px); overflow-y:auto; }
+        @media(max-width:640px) { .pt-detail-body{max-height:none;} }
         .pt-section-title { font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#94a3b8; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
         .pt-info-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+        @media(max-width:480px) { .pt-info-grid{grid-template-columns:1fr;} }
         .pt-info-item { background:rgba(10,22,40,.02); border-radius:9px; padding:9px 12px; }
         .pt-info-key  { font-size:.65rem; color:#94a3b8; letter-spacing:.06em; text-transform:uppercase; }
         .pt-info-val  { font-size:.82rem; font-weight:500; color:#0a1628; margin-top:2px; }

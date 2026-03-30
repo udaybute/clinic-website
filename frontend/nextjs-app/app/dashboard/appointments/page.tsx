@@ -616,6 +616,7 @@ export default function AppointmentsPage() {
         .ap-error  { background:rgba(220,38,38,.06); border:1px solid rgba(220,38,38,.2); border-radius:12px; padding:14px 18px; font-size:.83rem; color:#dc2626; display:flex; align-items:center; gap:8px; }
         .ap-meta   { font-size:.78rem; color:#94a3b8; }
 
+        .ap-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
         @media(max-width:900px) {
           .ap-table thead th:nth-child(2),
           .ap-table tbody td:nth-child(2) { display:none; }
@@ -624,6 +625,14 @@ export default function AppointmentsPage() {
           .ap-table thead th:nth-child(5),
           .ap-table tbody td:nth-child(5) { display:none; }
           .ap-search input { width:140px; }
+        }
+        @media(max-width:640px) {
+          .ap-topbar { flex-direction:column; align-items:stretch; }
+          .ap-new-btn { width:100%; justify-content:center; }
+          .ap-search { flex:1; }
+          .ap-search input { width:100%; }
+          .ap-filters { overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px; -webkit-overflow-scrolling:touch; }
+          .ap-drbar { overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px; }
         }
       `}</style>
 
@@ -710,6 +719,7 @@ export default function AppointmentsPage() {
             </div>
           ) : (
             <>
+              <div className="ap-table-wrap">
               <table className="ap-table">
                 <thead>
                   <tr>
@@ -768,6 +778,7 @@ export default function AppointmentsPage() {
                   })}
                 </tbody>
               </table>
+              </div>
 
               {/* Pagination */}
               {totalPages > 1 && (

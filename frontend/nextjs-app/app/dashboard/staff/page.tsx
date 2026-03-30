@@ -258,7 +258,9 @@ export default function StaffPage() {
         .sf-stat-lbl { font-size:.7rem; color:#64748b; }
 
         .sf-toolbar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+        @media(max-width:640px) { .sf-toolbar{flex-direction:column;align-items:stretch;gap:12px;} .sf-add-btn{width:100%;justify-content:center;margin-left:0;} .sf-search input{width:100%;} .sf-search{flex:1;} }
         .sf-tabs    { display:flex; gap:5px; }
+        @media(max-width:480px) { .sf-tabs{overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;} }
         .sf-tab     { padding:6px 13px; border-radius:50px; border:1.5px solid rgba(10,22,40,.1); background:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.76rem; font-weight:500; color:#64748b; transition:all .15s; display:flex; align-items:center; gap:5px; }
         .sf-tab.active { background:#0a1628; color:#fff; border-color:#0a1628; }
         .sf-tab:hover:not(.active) { border-color:#0a1628; color:#0a1628; }
@@ -274,7 +276,9 @@ export default function StaffPage() {
         .sf-add-btn:hover { transform:translateY(-1px); }
 
         .sf-card   { background:#fff; border-radius:18px; border:1px solid rgba(10,22,40,.07); box-shadow:0 2px 14px rgba(10,22,40,.05); overflow:hidden; }
-        .sf-table  { width:100%; border-collapse:collapse; }
+        .sf-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+        .sf-table  { width:100%; border-collapse:collapse; min-width:580px; }
+        @media(max-width:768px) { .sf-table thead th,.sf-table tbody td{padding:10px 12px;font-size:.78rem;} }
         .sf-table thead th { text-align:left; padding:12px 16px; font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; border-bottom:1px solid rgba(10,22,40,.07); background:rgba(10,22,40,.02); white-space:nowrap; }
         .sf-table tbody tr { transition:background .15s; animation:fadeIn .25s ease both; }
         .sf-table tbody tr:hover { background:rgba(10,22,40,.02); }
@@ -389,6 +393,7 @@ export default function StaffPage() {
             </div>
           ) : (
             <>
+              <div className="sf-table-wrap">
               <table className="sf-table">
                 <thead>
                   <tr><th>Member</th><th>Role</th><th>Phone</th><th>Joined</th><th>Status</th><th>Actions</th></tr>
@@ -436,6 +441,7 @@ export default function StaffPage() {
                   })}
                 </tbody>
               </table>
+              </div>
 
               {totalPages > 1 && (
                 <div className="sf-pagination">

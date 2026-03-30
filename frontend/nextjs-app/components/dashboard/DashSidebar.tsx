@@ -90,7 +90,7 @@ export default function DashSidebar({ open, onToggle }: Props) {
         top:        0,
         left:       0,
         bottom:     0,
-        width:      "265px",
+        width:      "min(265px, 85vw)",
         transform:  open ? "translateX(0)" : "translateX(-100%)",
         transition: "transform .28s cubic-bezier(.25,0,.25,1)",
         zIndex:     300,

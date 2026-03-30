@@ -74,6 +74,11 @@ export default function MessagesPage() {
         .msg-item { cursor:pointer; transition:background .15s; border-radius:12px; }
         .msg-item:hover { background:rgba(13,148,136,.05) !important; }
         .msg-item.active { background:rgba(13,148,136,.09) !important; }
+        .msg-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+        .msg-compose-btn { flex-shrink:0; }
+        .msg-layout { display:grid; grid-template-columns:300px 1fr; gap:16px; min-height:520px; }
+        @media(max-width:768px) { .msg-layout { grid-template-columns:1fr; } .msg-panel-right { display:none; } .msg-panel-right.visible { display:flex; } }
+        @media(max-width:480px) { .msg-header { flex-direction:column; align-items:stretch; } .msg-compose-btn { width:100%; justify-content:center !important; } }
       `}</style>
 
       <div style={{ fontFamily: "'DM Sans',sans-serif", maxWidth: 1100 }}>
@@ -98,7 +103,7 @@ export default function MessagesPage() {
         </div>
 
         {/* Two-panel layout */}
-        <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 16, minHeight: 520 }}>
+        <div className="msg-layout">
           {/* Left — message list */}
           <div style={{ background: "#fff", borderRadius: 16, border: "1px solid rgba(10,22,40,.07)", padding: "12px 10px", display: "flex", flexDirection: "column", gap: 4 }}>
             {messages.map(m => (

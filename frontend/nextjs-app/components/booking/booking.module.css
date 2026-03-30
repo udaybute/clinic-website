@@ -636,4 +636,19 @@
   .stepCircle   { width: 30px; height: 30px; font-size: 0.75rem; }
   .cardBody     { padding: 20px 18px 26px; }
   .cardHeader   { padding: 16px 18px; }
+  .root         { padding: 32px 1rem 80px; }
+  .card         { border-radius: 16px; }
+  .title        { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+  .bsNav        { flex-direction: column; gap: 8px; }
+  .bsBtnBack    { order: 2; }
+  .bsBtnNext    { order: 1; }
+  .bsSummaryRow { padding: 11px 14px; }
+  .float        { display: none; }
+}
+
+@media (max-width: 480px) {
+  .bsOptionGrid { grid-template-columns: 1fr; }
+  .progressWrap { padding: 0 4px; }
+  .stepCounter  { display: none; }
+  .header       { margin-bottom: 28px; }
 }

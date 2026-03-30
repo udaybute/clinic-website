@@ -187,12 +187,25 @@ export default function ReportsPage() {
         .appt-row { transition: background .12s; }
         .next-badge { animation: pulse2 2s infinite; }
         .refresh-btn:hover { color: #0d9488 !important; }
+        @media(max-width:640px) {
+          .rp-hero-padding { padding: 18px 20px !important; }
+          .rp-hero-stats { display:grid !important; grid-template-columns:1fr 1fr !important; gap:12px !important; }
+          .rp-stat-grid  { grid-template-columns:1fr 1fr !important; }
+          .rp-qa-grid    { grid-template-columns:1fr 1fr !important; }
+          .rp-two-col    { grid-template-columns:1fr !important; }
+          .rp-card-pad   { padding:16px !important; }
+        }
+        @media(max-width:480px) {
+          .rp-stat-grid  { grid-template-columns:1fr !important; }
+          .rp-qa-grid    { grid-template-columns:1fr !important; }
+          .rp-hero-stats { grid-template-columns:1fr 1fr !important; }
+        }
       `}</style>
 
       <div style={{ fontFamily: "'DM Sans',sans-serif" }}>
 
         {/* ── Hero Header ──────────────────────────────────────────────────── */}
-        <div style={{ background: "linear-gradient(135deg,#0a1628 0%,#0d4a42 60%,#0d9488 100%)", borderRadius: 20, padding: "28px 32px", marginBottom: 24, color: "#fff", position: "relative", overflow: "hidden" }}>
+        <div className="rp-hero-padding" style={{ background: "linear-gradient(135deg,#0a1628 0%,#0d4a42 60%,#0d9488 100%)", borderRadius: 20, padding: "28px 32px", marginBottom: 24, color: "#fff", position: "relative", overflow: "hidden" }}>
           {/* Decorative circles */}
           <div style={{ position: "absolute", right: -60, top: -60, width: 240, height: 240, borderRadius: "50%", background: "rgba(255,255,255,.04)", pointerEvents: "none" }} />
           <div style={{ position: "absolute", right: 40, bottom: -80, width: 180, height: 180, borderRadius: "50%", background: "rgba(255,255,255,.03)", pointerEvents: "none" }} />
@@ -266,7 +279,7 @@ export default function ReportsPage() {
         )}
 
         {/* ── Quick Actions ─────────────────────────────────────────────────── */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 24 }}>
+        <div className="rp-qa-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 24 }}>
           {quickActions.map(qa => (
             <a key={qa.label} href={qa.href} style={{ textDecoration: "none" }}>
               <div className="qa-card" style={{ background: "#fff", borderRadius: 14, border: "1px solid rgba(10,22,40,.07)", padding: "16px", display: "flex", flexDirection: "column", gap: 10, boxShadow: "0 2px 10px rgba(10,22,40,.04)", cursor: "pointer" }}>
@@ -279,7 +292,7 @@ export default function ReportsPage() {
         </div>
 
         {/* ── Stat Cards + Completion Ring ─────────────────────────────────── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto", gap: 14, marginBottom: 24 }}>
+        <div className="rp-stat-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr auto", gap: 14, marginBottom: 24 }}>
           {loading
             ? Array.from({ length: 3 }).map((_, i) => (
                 <div key={i} style={{ background: "#fff", borderRadius: 16, border: "1px solid rgba(10,22,40,.07)", padding: "20px" }}>
@@ -363,7 +376,7 @@ export default function ReportsPage() {
         )}
 
         {/* ── Main Two-Column Grid ────────────────────────────────────────────── */}
-        <div style={{ display: "grid", gridTemplateColumns: labs.length > 0 && isDoctor ? "1fr 360px" : "1fr", gap: 20 }}>
+        <div className="rp-two-col" style={{ display: "grid", gridTemplateColumns: labs.length > 0 && isDoctor ? "1fr 360px" : "1fr", gap: 20 }}>
 
           {/* Appointment Timeline */}
           <div style={{ background: "#fff", borderRadius: 16, border: "1px solid rgba(10,22,40,.07)", overflow: "hidden", boxShadow: "0 2px 10px rgba(10,22,40,.04)", animation: "fadeUp .3s ease .2s both" }}>

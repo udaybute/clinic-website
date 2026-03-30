@@ -553,12 +553,14 @@ export default function BillingPage() {
 
         /* Stats */
         .bl-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+        @media(max-width:480px) { .bl-stats{grid-template-columns:1fr 1fr;} .bl-stat{padding:14px 16px;} .bl-stat-num{font-size:1.3rem;} }
         .bl-stat  { background:#fff; border-radius:16px; border:1px solid rgba(10,22,40,.07); padding:18px 20px; box-shadow:0 2px 12px rgba(10,22,40,.05); }
         .bl-stat-num { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:700; line-height:1; }
         .bl-stat-lbl { font-size:.72rem; color:#64748b; margin-top:4px; }
 
         /* Toolbar */
         .bl-toolbar { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+        @media(max-width:640px) { .bl-toolbar{flex-direction:column;align-items:stretch;} .bl-new-btn{width:100%;justify-content:center;margin-left:0;} .bl-search input{width:100%;} .bl-search{flex:1;} }
         .bl-filters { display:flex; gap:6px; flex-wrap:wrap; }
         .bl-fbtn    { padding:6px 13px; border-radius:50px; border:1.5px solid rgba(10,22,40,.1); background:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.76rem; font-weight:500; color:#64748b; transition:all .18s; display:flex; align-items:center; gap:5px; }
         .bl-fbtn.active    { background:#0a1628; color:#fff; border-color:#0a1628; }
@@ -579,9 +581,10 @@ export default function BillingPage() {
 
         /* Card */
         .bl-card  { background:#fff; border-radius:18px; border:1px solid rgba(10,22,40,.07); box-shadow:0 2px 16px rgba(10,22,40,.05); overflow:hidden; }
+        .bl-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
 
         /* Table */
-        .bl-table { width:100%; border-collapse:collapse; }
+        .bl-table { width:100%; border-collapse:collapse; min-width:600px; }
         .bl-table thead th { text-align:left; padding:11px 16px; font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; border-bottom:1px solid rgba(10,22,40,.07); background:rgba(10,22,40,.02); white-space:nowrap; }
         .bl-table tbody tr { cursor:pointer; transition:background .15s; animation:fadeIn .25s ease both; }
         .bl-table tbody tr:hover  { background:rgba(10,22,40,.02); }
@@ -701,6 +704,7 @@ export default function BillingPage() {
               </div>
             ) : (
               <>
+                <div className="bl-table-wrap">
                 <table className="bl-table">
                   <thead>
                     <tr><th>Patient</th><th>Total</th><th>Paid</th><th>Balance</th><th>Status</th><th>Method</th></tr>
@@ -725,6 +729,7 @@ export default function BillingPage() {
                     })}
                   </tbody>
                 </table>
+                </div>
 
                 {totalPages > 1 && (
                   <div className="bl-pagination">

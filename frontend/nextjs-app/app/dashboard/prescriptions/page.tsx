@@ -299,6 +299,15 @@ export default function PrescriptionsPage() {
         .rx-select:focus { border-color: #0d9488; }
         .dd-item:hover { background: rgba(13,148,136,.08); }
         .section-hd { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #94a3b8; margin-bottom: 10px; }
+        @media(max-width:640px) {
+          .rx-toolbar { flex-direction:column !important; align-items:stretch !important; }
+          .rx-search  { max-width:100% !important; flex:1 !important; }
+          .rx-add-btn { width:100% !important; justify-content:center !important; margin-left:0 !important; }
+        }
+        @media(max-width:480px) {
+          .rx-grid-2col { grid-template-columns:1fr !important; }
+          .rx-grid-4col { grid-template-columns:1fr 1fr !important; }
+        }
       `}</style>
 
       <div style={{ fontFamily: "'DM Sans', sans-serif" }}>

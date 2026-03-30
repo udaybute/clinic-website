@@ -456,7 +456,9 @@ export default function DoctorsPage() {
         .dr-sub     { font-size:.8rem; color:#64748b; margin-top:2px; }
 
         .dr-toolbar { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+        @media(max-width:640px) { .dr-toolbar{flex-direction:column;align-items:stretch;gap:12px;} .dr-add-btn{width:100%;justify-content:center;margin-left:0;} .dr-search input{width:100%;} .dr-search{flex:1;} }
         .dr-specs   { display:flex; gap:6px; flex-wrap:wrap; }
+        @media(max-width:480px) { .dr-specs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;-webkit-overflow-scrolling:touch;} }
         .dr-spec    { padding:5px 12px; border-radius:50px; border:1px solid rgba(10,22,40,.1); background:#fff; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.74rem; color:#64748b; transition:all .15s; }
         .dr-spec:hover { border-color:#0d9488; color:#0d9488; }
         .dr-spec.active { background:#0a1628; color:#fff; border-color:#0a1628; }
@@ -470,6 +472,7 @@ export default function DoctorsPage() {
         .dr-add-btn:hover { transform:translateY(-1px); }
 
         .dr-grid    { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:20px; }
+        @media(max-width:640px) { .dr-grid{grid-template-columns:1fr;gap:14px;} }
 
         .dr-skel-card { background:#fff; border-radius:20px; border:1px solid rgba(10,22,40,.07); padding:20px; display:flex; flex-direction:column; gap:12px; }
 

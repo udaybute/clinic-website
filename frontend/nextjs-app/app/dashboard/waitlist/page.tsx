@@ -294,6 +294,12 @@ export default function WaitlistPage() {
         .wl-empty   { text-align:center; padding:60px 20px; color:#94a3b8; }
         .wl-error   { background:rgba(220,38,38,.06); border:1px solid rgba(220,38,38,.2); border-radius:12px; padding:14px 18px; font-size:.83rem; color:#dc2626; display:flex; gap:8px; align-items:center; }
         .wl-success { background:rgba(22,163,74,.08); border:1px solid rgba(22,163,74,.2); border-radius:12px; padding:12px 18px; font-size:.83rem; color:#16a34a; animation:fadeIn .3s ease; }
+        @media(max-width:640px) {
+          .wl-header { flex-direction:column; align-items:stretch; }
+          .wl-hero   { flex-direction:column; align-items:flex-start; padding:18px 20px; gap:12px; }
+          .wl-hero-divider { width:100%; height:1px; }
+          .wl-next-btn { width:100%; justify-content:center; }
+        }
       `}</style>
 
       <div className="wl-root">

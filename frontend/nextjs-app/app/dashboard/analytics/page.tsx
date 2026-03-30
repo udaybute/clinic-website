@@ -204,10 +204,13 @@ export default function AnalyticsPage() {
         .an-kpi-num  { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:700; color:#0a1628; line-height:1; margin-bottom:4px; }
         .an-kpi-lbl  { font-size:.76rem; color:#64748b; margin-bottom:6px; }
         .an-kpi-sub  { font-size:.72rem; color:#94a3b8; margin-top:4px; }
+        @media(max-width:480px) { .an-kpi{padding:14px 16px;} .an-kpi-num{font-size:1.6rem;} }
 
         .an-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
         .an-grid3 { display:grid; grid-template-columns:2fr 1fr; gap:20px; }
         @media(max-width:900px) { .an-grid2,.an-grid3{grid-template-columns:1fr;} }
+        @media(max-width:640px) { .an-card{padding:16px;} .an-header{gap:8px;} .an-doc-stats{gap:10px;} .an-bar-label{width:80px;} .an-title{font-size:1.3rem;} }
+        @media(max-width:480px) { .an-month-btns{flex-wrap:wrap;gap:4px;} .an-skel-kpis{grid-template-columns:repeat(2,1fr);} .an-doc-row{flex-wrap:wrap;} }
 
         .an-card       { background:#fff; border-radius:18px; border:1px solid rgba(10,22,40,.07); box-shadow:0 2px 16px rgba(10,22,40,.05); padding:22px; animation:fadeIn .4s ease both; }
         .an-card-title { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; color:#0a1628; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; }
